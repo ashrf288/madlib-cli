@@ -35,3 +35,11 @@ def parse_template(input):
     return (actual_stripped,actual_parts)
 
 
+def merge(theText,tup):
+    '''
+    takes 2 inputs text and a tuple and joins the tuples elemnts with the string insted of 
+    { } in the string
+    '''
+    return theText.format(*tup)
+
+
