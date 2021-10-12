@@ -43,12 +43,12 @@ def merge(theText,tup):
     return theText.format(*tup)
 
 
-def create_file(result):
+def add_new_file(result):
 
     '''
     takes in text and creat a file with that  details and then writes to that file 
     the arguments of that text 
     '''
-    with open("assets/make_me_a_video_game_output_from_user.txt", "w") as f:
-        f.write(result)
+    with open("assets/make_me_a_video_game_output_from_user.txt", "w") as file:
+        file.write(result)
 
