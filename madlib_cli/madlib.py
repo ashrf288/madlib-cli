@@ -1,15 +1,26 @@
 import re
 
-import getpass
-import os
-print("Welcome You are in the Madlib Game")
+
+def welcom() :
+
+    """
+    print welcom message 
+    """
+    print('''welcom to the  madlib_game :)
+    
+     please  fill the blanks in the words
+    ''')
 
 def read_template(path):
     """ function how read file from the url
         and return what that file have 
     """ 
-    a=open(path)
-    return a.read()
+    try:
+      data=open(path)
+      return data.read()
+    except:
+        raise FileNotFoundError(
+         'file not found')  
 
 def parse_template(input):
     '''
@@ -42,25 +53,14 @@ def merge(theText,tup):
     takes 2 inputs text and a tuple and joins the tuples elemnts with the string insted of 
     { } in the string
     '''
-    return theText.format(*tup)
+    new_text = theText.format(*tup)
+
+    with open('assets/test.txt', 'w') as output:
+        output.write(new_text)
+    return new_text
 
 
-def add_new_file(result):
-
-    '''
-    takes in text and creat a file with that  details and then writes to that file 
-    the arguments of that text 
-    '''
-    with open("assets/make_me_a_video_game_output_from_user.txt", "w") as file:
-        file.write(result)
 
 
-def save_file(text: str):
-    save_path = "./assets"
-    file_name = "{}.txt".format(getpass.getuser())
-    file_path = os.path.join(save_path, file_name)
-    try:
-        with open(file_path, "w") as file:
-            file.write(text)
-    except Exception as err:
-        raise err.__cause__
+
+
