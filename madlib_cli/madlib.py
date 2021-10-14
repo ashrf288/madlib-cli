@@ -1,5 +1,7 @@
 import re
 
+import getpass
+import os
 print("Welcome You are in the Madlib Game")
 
 def read_template(path):
@@ -52,3 +54,13 @@ def add_new_file(result):
     with open("assets/make_me_a_video_game_output_from_user.txt", "w") as file:
         file.write(result)
 
+
+def save_file(text: str):
+    save_path = "./assets"
+    file_name = "{}.txt".format(getpass.getuser())
+    file_path = os.path.join(save_path, file_name)
+    try:
+        with open(file_path, "w") as file:
+            file.write(text)
+    except Exception as err:
+        raise err.__cause__
