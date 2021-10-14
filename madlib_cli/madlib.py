@@ -8,7 +8,6 @@ def welcom() :
     """
     print('''welcom to the  madlib_game :)
     
-     please  fill the blanks in the words
     ''')
 
 def read_template(path):
@@ -53,14 +52,23 @@ def merge(theText,tup):
     takes 2 inputs text and a tuple and joins the tuples elemnts with the string insted of 
     { } in the string
     '''
-    new_text = theText.format(*tup)
+    merged_text=text.format(*tup)
+    with open('assets/result.txt','w') as result:
+        result.write(merged_text)
+        print(merged_text)
+    return merged_text
 
-    with open('assets/test.txt', 'w') as output:
-        output.write(new_text)
-    return new_text
+   
 
 
+if __name__== "__main__":
 
-
+    file_to_read=read_template("assets/dark_and_stormy_night_template.txt")
+    text,words=parse_template(file_to_read)
+    word_result=[]
+    for i in words:
+        user_input=input(f"Enter {i} >> ")
+        word_result.append(user_input)
+    madlib_result=merge(text,word_result)
 
 
