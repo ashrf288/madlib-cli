@@ -1,1 +1,0 @@
-It was a /home/ashrf288/401/madlib-cli/.venv/bin/python /home/ashrf288/401/madlib-cli/madlib_cli/madlib.py and as as.

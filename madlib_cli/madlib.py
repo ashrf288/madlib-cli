@@ -1,18 +1,11 @@
 import re
 
 
-def welcom() :
 
-    """
-    print welcom message 
-    """
-    print('''welcom to the  madlib_game :)
-    
-    ''')
 
 def read_template(path):
     """ function how read file from the url
-        and return what that file have 
+        and return  thr file data 
     """ 
     try:
       data=open(path)
@@ -23,52 +16,50 @@ def read_template(path):
 
 def parse_template(input):
     '''
-    takes a text as input and return a tuple and a string without the words
+    takes a text as input (which we took from the file )and return a tuple and a string without the words
     in the tupple and uses regex to idenitify the required word 
     '''
-    actual_stripped=''
-    actual_parts=[]
+    word_types=list(re.findall(r'{(.*?)}',input))
 
-    x=input.split(' ')
-    print(x)
-    reg=r"^{\w+}|\.$"
-    for i in x:
-        if re.match(reg,i)==None :
-            actual_stripped+=f"{i} "
-        else :
-            if i==x[-1]:
-                actual_stripped+='{}.'
-                actual_parts+=[i[1:-2]]
-            else:
-                actual_parts+=[i[1:-1]]
-                actual_stripped+='{} '
+    text=re.sub('{.*?}','{}',input)
 
-    actual_parts=tuple(actual_parts)
-    return (actual_stripped,actual_parts)
+    return text,word_types
 
 
-def merge(theText,tup):
-    '''
-    takes 2 inputs text and a tuple and joins the tuples elemnts with the string insted of 
-    { } in the string
-    '''
-    merged_text=text.format(*tup)
-    with open('assets/result.txt','w') as result:
+
+def merge(text,word):
+    """
+    merge function that takes in a “bare” template and a list of user entered language parts, 
+    and returns a string with the language parts inserted into the template.
+    """
+    merged_text=text.format(*word)
+    with open('assets/final_reslut.txt','w') as result:
         result.write(merged_text)
         print(merged_text)
     return merged_text
 
    
 
+############################   testing  #####################################
 
-if __name__== "__main__":
+def run_game():
+   file_to_read=read_template("assets/dark_and_stormy_night_template.txt")
+   text,words=parse_template(file_to_read)
+   word_result=[]
+   for i in words:
+      user_input=input(f"Enter {i} >> ")
+      word_result.append(user_input)
+      madlib_result=merge(text,word_result)
 
-    file_to_read=read_template("assets/dark_and_stormy_night_template.txt")
-    text,words=parse_template(file_to_read)
-    word_result=[]
-    for i in words:
-        user_input=input(f"Enter {i} >> ")
-        word_result.append(user_input)
-    madlib_result=merge(text,word_result)
+
+
+"""
+print welcom message 
+
+note : incase of error runt the program again
+"""
+print('''welcom to the  madlib_game :)''')
+run_game()
+
 
 
