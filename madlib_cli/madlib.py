@@ -19,7 +19,7 @@ def parse_template(input):
     takes a text as input (which we took from the file )and return a tuple and a string without the words
     in the tupple and uses regex to idenitify the required word 
     '''
-    word_types=list(re.findall(r'{(.*?)}',input))
+    word_types=tuple(re.findall(r'{(.*?)}',input))
 
     text=re.sub('{.*?}','{}',input)
 
@@ -49,17 +49,17 @@ def run_game():
    for i in words:
       user_input=input(f"Enter {i} >> ")
       word_result.append(user_input)
-      madlib_result=merge(text,word_result)
+   madlib_result=merge(text,word_result)
 
 
 
-"""
-print welcom message 
+# """
+# print welcom message 
 
-note : incase of error runt the program again
-"""
-print('''welcom to the  madlib_game :)''')
-run_game()
+# note : incase of error runt the program again
+# """
+# print('''welcom to the  madlib_game :)''')
+# run_game()
 
 
 
